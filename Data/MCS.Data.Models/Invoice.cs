@@ -1,12 +1,16 @@
 ﻿namespace MCS.Data.Models
 {
     using System;
-    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
+    using MCS.Common;
     using MCS.Data.Common.Models;
 
     public class Invoice : BaseDeletableModel<int>
     {
+        [Required]
+        [MaxLength(GlobalConstants.InvoiceDescriptionMaxLength)]
+        [MinLength(GlobalConstants.InvoiceDescriptionMinLength)]
         public string Description { get; set; }
 
         public decimal NetSum { get; set; }

@@ -3,7 +3,9 @@ namespace MCS.Data.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
+    using MCS.Common;
     using MCS.Data.Common.Models;
     using MCS.Data.Models.Enums;
     using Microsoft.AspNetCore.Identity;
@@ -36,11 +38,15 @@ namespace MCS.Data.Models
 
         public DateTime? DeletedOn { get; set; }
 
+        [Required]
+        [MaxLength(GlobalConstants.FirstNameMaxLength)]
+        [MinLength(GlobalConstants.FirstNameMinLength)]
         public string FirstName { get; set; }
 
+        [Required]
+        [MaxLength(GlobalConstants.LastNameMaxLength)]
+        [MinLength(GlobalConstants.LastNameMinLength)]
         public string LastName { get; set; }
-
-        public string Address { get; set; }
 
         public Gender Gender { get; set; }
 

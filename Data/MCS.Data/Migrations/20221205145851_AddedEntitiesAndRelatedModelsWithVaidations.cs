@@ -1,12 +1,11 @@
-﻿#nullable disable
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
 
 namespace MCS.Data.Migrations
 {
-    using System;
-
-    using Microsoft.EntityFrameworkCore.Migrations;
-
-    public partial class AddedEntitiesAndRelatedModels : Migration
+    public partial class AddedEntitiesAndRelatedModelsWithVaidations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,16 +13,12 @@ namespace MCS.Data.Migrations
                 name: "Settings");
 
             migrationBuilder.AddColumn<string>(
-                name: "Address",
-                table: "AspNetUsers",
-                type: "nvarchar(max)",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
                 name: "FirstName",
                 table: "AspNetUsers",
-                type: "nvarchar(max)",
-                nullable: true);
+                type: "nvarchar(25)",
+                maxLength: 25,
+                nullable: false,
+                defaultValue: "");
 
             migrationBuilder.AddColumn<int>(
                 name: "Gender",
@@ -41,8 +36,10 @@ namespace MCS.Data.Migrations
             migrationBuilder.AddColumn<string>(
                 name: "LastName",
                 table: "AspNetUsers",
-                type: "nvarchar(max)",
-                nullable: true);
+                type: "nvarchar(25)",
+                maxLength: 25,
+                nullable: false,
+                defaultValue: "");
 
             migrationBuilder.AddColumn<int>(
                 name: "SpecialityId",
@@ -63,7 +60,7 @@ namespace MCS.Data.Migrations
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -86,13 +83,13 @@ namespace MCS.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserComment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserComment = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     AnswerId = table.Column<int>(type: "int", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -115,7 +112,7 @@ namespace MCS.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     NetSum = table.Column<decimal>(type: "decimal(14,2)", precision: 14, scale: 2, nullable: false),
                     TotalSum = table.Column<decimal>(type: "decimal(14,2)", precision: 14, scale: 2, nullable: false),
                     IssuedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -124,7 +121,7 @@ namespace MCS.Data.Migrations
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -142,14 +139,14 @@ namespace MCS.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsRead = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -171,7 +168,7 @@ namespace MCS.Data.Migrations
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -196,14 +193,14 @@ namespace MCS.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Treatment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Treatment = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     DoctorsName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IssuedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PatientId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -221,12 +218,12 @@ namespace MCS.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -353,10 +350,6 @@ namespace MCS.Data.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
-                name: "Address",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
                 name: "FirstName",
                 table: "AspNetUsers");
 
@@ -387,7 +380,7 @@ namespace MCS.Data.Migrations
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

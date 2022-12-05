@@ -1,4 +1,4 @@
-﻿namespace MCS.Web
+namespace MCS.Web
 {
     using System.Reflection;
 

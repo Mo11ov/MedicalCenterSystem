@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\MCS.Common\MCS.Common.csproj" />
     <ProjectReference Include="..\MCS.Data.Common\MCS.Data.Common.csproj" />
   </ItemGroup>
   
