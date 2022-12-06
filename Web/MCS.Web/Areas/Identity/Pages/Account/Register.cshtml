@@ -30,7 +30,7 @@
             </div>
             <div class="form-floating">
                 <select asp-for="Input.Gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()" aria-required="true" >
-                    <option></option>
+                    <option>Select Gender</option>
                 </select>
                 <label asp-for="Input.Gender"></label>
                 <span asp-validation-for="Input.Gender" class="text-danger"></span>

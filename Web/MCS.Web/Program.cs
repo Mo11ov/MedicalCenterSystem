@@ -8,6 +8,7 @@ namespace MCS.Web
     using MCS.Data.Models;
     using MCS.Data.Repositories;
     using MCS.Data.Seeding;
+    using MCS.Services.Data;
     using MCS.Services.Mapping;
     using MCS.Services.Messaging;
     using MCS.Web.ViewModels;
@@ -63,6 +64,8 @@ namespace MCS.Web
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<ISpecialtiesService, SpecialtiesService>();
+
         }
 
         private static void Configure(WebApplication app)
