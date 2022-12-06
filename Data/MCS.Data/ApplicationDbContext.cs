@@ -36,7 +36,7 @@
 
         public DbSet<Prescription> Prescriptions { get; set; }
 
-        public DbSet<Speciality> Specialities { get; set; }
+        public DbSet<Department> Departments { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

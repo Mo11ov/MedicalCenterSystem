@@ -5,8 +5,8 @@
 
     using MCS.Data.Models;
 
-    public interface ISpecialtiesService
+    public interface IDepartmentService
     {
-        Task<IEnumerable<Speciality>> GetAllAsync();
+        Task<IEnumerable<Department>> GetAllAsync();
     }
 }

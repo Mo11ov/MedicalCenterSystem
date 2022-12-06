@@ -6,9 +6,9 @@
     using MCS.Common;
     using MCS.Data.Common.Models;
 
-    public class Speciality : BaseDeletableModel<int>
+    public class Department : BaseDeletableModel<int>
     {
-        public Speciality()
+        public Department()
         {
             this.Doctors = new HashSet<ApplicationUser>();
         }

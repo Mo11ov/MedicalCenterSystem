@@ -1,6 +1,6 @@
 ﻿namespace MCS.Web.ViewModels.Speciality
 {
-    public class SpecialityViewModel
+    public class DepartmentViewModel
     {
         public int Id { get; set; }
 

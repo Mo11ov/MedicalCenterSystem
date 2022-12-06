@@ -7,23 +7,23 @@
     using MCS.Web.ViewModels.Speciality;
     using Microsoft.AspNetCore.Mvc;
 
-    public class SpecialityController : BaseController
+    public class DepartmentController : BaseController
     {
-        private readonly ISpecialtiesService specialityService;
+        private readonly IDepartmentService departmentService;
 
-        public SpecialityController(ISpecialtiesService specialityService)
+        public DepartmentController(IDepartmentService specialityService)
         {
-            this.specialityService = specialityService;
+            this.departmentService = specialityService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var specilities = await this.specialityService.GetAllAsync();
+            var departments = await this.departmentService.GetAllAsync();
 
-            var model = new SpecialityListViewModel
+            var model = new DepartmentListViewModel
             {
-                Specialities = specilities
-                .Select(s => new SpecialityViewModel
+                Departments = departments
+                .Select(s => new DepartmentViewModel
                 {
                     Id = s.Id,
                     Name = s.Name,

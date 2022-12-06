@@ -64,7 +64,7 @@ namespace MCS.Web
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISpecialtiesService, SpecialtiesService>();
+            services.AddTransient<IDepartmentService, DepartmentService>();
 
         }
 

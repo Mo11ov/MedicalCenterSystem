@@ -52,9 +52,9 @@ namespace MCS.Data.Models
 
         public string ImageUrl { get; set; }
 
-        public int? SpecialityId { get; set; }
+        public int? DepartmentId { get; set; }
 
-        public virtual Speciality Speciality { get; set; }
+        public virtual Department Department { get; set; }
 
         public virtual ICollection<Appointment> PatientAppointments { get; set; }
 
