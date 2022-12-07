@@ -11,14 +11,45 @@
     {
         private readonly IDeletableEntityRepository<Department> departmentRepository;
 
-        public DepartmentService(IDeletableEntityRepository<Department> specialityRepository)
+        public DepartmentService(IDeletableEntityRepository<Department> departmentRepository)
         {
-            this.departmentRepository = specialityRepository;
+            this.departmentRepository = departmentRepository;
+        }
+
+        public async Task AddSync(string name, string description, string imageUrl)
+        {
+            await this.departmentRepository.AddAsync(new Department
+            {
+                Name = name,
+                Description = description,
+                ImageUrl = imageUrl,
+            });
+
+            await this.departmentRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var department = await this.departmentRepository
+                .AllAsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            this.departmentRepository.Delete(department);
+            await this.departmentRepository.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Department>> GetAllAsync()
         {
             return await this.departmentRepository.AllAsNoTracking().ToListAsync();
+        }
+
+        public async Task<Department> GetByIdAsync(int id)
+        {
+            var department = await this.departmentRepository
+                .AllAsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            return department;
         }
     }
 }

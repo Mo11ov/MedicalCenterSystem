@@ -28,10 +28,13 @@
                     Id = s.Id,
                     Name = s.Name,
                     Description = s.Description,
+                    ImageUrl = s.ImageUrl,
                 }).ToArray(),
             };
 
             return this.View(model);
         }
     }
+
+    
 }

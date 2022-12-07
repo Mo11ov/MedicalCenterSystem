@@ -8,5 +8,11 @@
     public interface IDepartmentService
     {
         Task<IEnumerable<Department>> GetAllAsync();
+
+        Task<Department> GetByIdAsync(int id);
+
+        Task AddSync(string name, string description, string imageUrl);
+
+        Task DeleteAsync(int id);
     }
 }
