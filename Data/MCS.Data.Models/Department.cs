@@ -14,8 +14,8 @@
         }
 
         [Required]
-        [MaxLength(GlobalConstants.SpeciallityNameMaxLength)]
-        [MinLength(GlobalConstants.SpeciallityNameMinLength)]
+        [MaxLength(GlobalConstants.DepartmentNameMaxLength)]
+        [MinLength(GlobalConstants.DepartmentNameMinLength)]
         public string Name { get; set; }
 
         public string Description { get; set; }

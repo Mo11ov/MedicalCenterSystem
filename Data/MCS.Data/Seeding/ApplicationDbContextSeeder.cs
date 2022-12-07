@@ -27,6 +27,7 @@
                           {
                               new RolesSeeder(),
                               new DepartmentSeeder(),
+                              new UserSeeder(),
                           };
 
             foreach (var seeder in seeders)

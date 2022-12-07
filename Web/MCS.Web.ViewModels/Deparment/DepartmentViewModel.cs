@@ -1,4 +1,4 @@
-﻿namespace MCS.Web.ViewModels.Speciality
+﻿namespace MCS.Web.ViewModels.Department
 {
     public class DepartmentViewModel
     {

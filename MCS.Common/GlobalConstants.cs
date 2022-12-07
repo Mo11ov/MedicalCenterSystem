@@ -8,6 +8,14 @@
 
         public const string DoctorRoleName = "Doctor";
 
+        public const string UsersPassword = "123456";
+
+        public const string AdminEmail = "admin@admin.com";
+
+        public const string DoctorEmail = "doctor@doctor.com";
+
+        public const string UserEmail = "user@appuser.com";
+
         // Data Validations
         public const int FirstNameMaxLength = 25;
 
@@ -25,9 +33,9 @@
 
         public const int InvoiceDescriptionMinLength = 5;
 
-        public const int SpeciallityNameMaxLength = 25;
+        public const int DepartmentNameMaxLength = 25;
 
-        public const int SpeciallityNameMinLength = 2;
+        public const int DepartmentNameMinLength = 2;
 
         public const int NotificationContentMaxLength = 50;
 
@@ -47,5 +55,8 @@
         public const string PediatricsDepartmentImage = "https://res.cloudinary.com/healthy-med/image/upload/v1670419980/departments/Pediatric-Department_wo658b.jpg";
 
         public const string UrologyDepartmentImage = "https://res.cloudinary.com/healthy-med/image/upload/v1670418097/departments/Urology-Department_pjimme.jpg";
+
+        // Count of seeded data
+        public const int SeededDepartmentsCount = 5;
     }
 }

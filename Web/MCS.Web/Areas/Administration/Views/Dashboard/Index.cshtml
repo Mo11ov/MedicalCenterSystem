@@ -1,0 +1,16 @@
+﻿@{
+    this.ViewData["Title"] = "Administrator Dashboard";
+}
+<br>
+<div class="text-center">
+    <h3 class="text-center"> Welcome to @this.ViewData["Title"]</h3>
+    <p class="lead d-none d-sm-block">You can navigate from here:</p>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <div>
+            <a asp-area="Administration" asp-controller="Department" asp-action="Index" class="col-xl-3 col-sm-6 py-2" bg-light">Departments</a>
+        </div>
+    </div>
+</div>
