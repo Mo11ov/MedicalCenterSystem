@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using MCS.Common;
+    using MCS.Services;
     using MCS.Services.Data;
     using MCS.Web.ViewModels.Department;
     using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,14 @@
     public class DepartmentController : AdministrationController
     {
         private readonly IDepartmentService departmentService;
+        private readonly ICloudinaryService cloudinaryService;
 
-        public DepartmentController(IDepartmentService departmentService)
+        public DepartmentController(
+            IDepartmentService departmentService,
+            ICloudinaryService cloudinaryService)
         {
             this.departmentService = departmentService;
+            this.cloudinaryService = cloudinaryService;
         }
 
         [HttpGet]
@@ -54,6 +59,15 @@
             }
 
             string imageUrl = string.Empty;
+
+            try
+            {
+                imageUrl = await this.cloudinaryService.UploadPictureAsync(model.Image, model.Name);
+            }
+            catch (System.Exception)
+            {
+                imageUrl = GlobalConstants.PediatricsDepartmentImage;
+            }
 
             await this.departmentService.AddAsync(model.Name, model.Description, imageUrl);
 

@@ -17,7 +17,7 @@
         public string Description { get; set; }
 
         [DataType(DataType.Upload)]
-        // [ImageFileAttribute(ErrorMessage = "Image should be JPG, PNG or JPEG and less than 1MB")]
-        public IFormFile ImageUrl { get; set; }
+        [ImageFileAttribute(ErrorMessage = "Image should be JPG, PNG or JPEG and less than 1MB")]
+        public IFormFile Image { get; set; }
     }
 }

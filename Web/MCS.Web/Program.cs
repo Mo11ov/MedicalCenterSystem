@@ -1,13 +1,14 @@
 namespace MCS.Web
 {
     using System.Reflection;
-
+    using CloudinaryDotNet;
     using MCS.Data;
     using MCS.Data.Common;
     using MCS.Data.Common.Repositories;
     using MCS.Data.Models;
     using MCS.Data.Repositories;
     using MCS.Data.Seeding;
+    using MCS.Services;
     using MCS.Services.Data;
     using MCS.Services.Mapping;
     using MCS.Services.Messaging;
@@ -62,10 +63,17 @@ namespace MCS.Web
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
+            // Cloudinary service
+            Cloudinary cloudinary = new Cloudinary(new Account(
+               configuration["Cloudinary:CloudName"],
+               configuration["Cloudinary:ApiKey"],
+               configuration["Cloudinary:ApiSecret"]));
+            services.AddSingleton(cloudinary);
+
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IDepartmentService, DepartmentService>();
-
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
         }
 
         private static void Configure(WebApplication app)
