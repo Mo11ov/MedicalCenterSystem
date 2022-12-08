@@ -5,5 +5,48 @@
 }
 
 <h2>
-    All Deparments 
+    All Deparments   
+    <span>
+        <a class="btn btn-success" asp-area="Administration" asp-controller="Department" asp-action="AddDepartment">Add New Department</a>
+    </span>
 </h2>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Image</th>
+            <th scope="col">Description</th>
+            <th scope="col">Delete Button</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var department in this.Model.Departments)
+        {
+            <tr>
+                <th scope="row">@department.Name</th>
+                <td>
+                    <img class="align-self-center" src="@department.ImageUrl" style="width:180px;height:120px;">
+                </td>
+                <td>@department.Description</td>
+                <td>
+                    @if (department.Id <= GlobalConstants.SeededDepartmentsCount)
+                    {
+                        <div class="text-muted" style="font-size:smaller">
+                            Seeded Data <br />Cannot Be Deleted
+                        </div>
+                    }
+                    else
+                    {
+                        <form method="post">
+                            <button type="submit" class="btn btn-danger btn-sm"
+                            asp-area="Administration" asp-controller="Department" asp-action="DeleteDepartment" asp-route-id="@department.Id">
+                                Delete
+                            </button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

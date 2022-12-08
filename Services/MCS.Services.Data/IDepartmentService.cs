@@ -11,7 +11,7 @@
 
         Task<Department> GetByIdAsync(int id);
 
-        Task AddSync(string name, string description, string imageUrl);
+        Task AddAsync(string name, string description, string imageUrl);
 
         Task DeleteAsync(int id);
     }

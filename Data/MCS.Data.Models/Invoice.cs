@@ -9,8 +9,7 @@
     public class Invoice : BaseDeletableModel<int>
     {
         [Required]
-        [MaxLength(GlobalConstants.InvoiceDescriptionMaxLength)]
-        [MinLength(GlobalConstants.InvoiceDescriptionMinLength)]
+        [StringLength(GlobalConstants.InvoiceDescriptionMaxLength, MinimumLength = GlobalConstants.InvoiceDescriptionMinLength)]
         public string Description { get; set; }
 
         public decimal NetSum { get; set; }

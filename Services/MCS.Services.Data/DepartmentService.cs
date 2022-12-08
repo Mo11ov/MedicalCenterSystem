@@ -16,7 +16,7 @@
             this.departmentRepository = departmentRepository;
         }
 
-        public async Task AddSync(string name, string description, string imageUrl)
+        public async Task AddAsync(string name, string description, string imageUrl)
         {
             await this.departmentRepository.AddAsync(new Department
             {
@@ -35,6 +35,7 @@
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             this.departmentRepository.Delete(department);
+
             await this.departmentRepository.SaveChangesAsync();
         }
 

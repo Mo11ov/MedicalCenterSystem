@@ -17,6 +17,7 @@
             this.departmentService = departmentService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var departments = await this.departmentService.GetAllAsync();
@@ -34,6 +35,29 @@
             };
 
             return this.View(model);
+        }
+
+        [HttpGet]
+        public IActionResult AddDepartment()
+        {
+            var model = new DepartmentInputModel();
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddDepartment(DepartmentInputModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            string imageUrl = string.Empty;
+
+            await this.departmentService.AddAsync(model.Name, model.Description, imageUrl);
+
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         [HttpPost]

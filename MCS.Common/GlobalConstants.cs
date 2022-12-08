@@ -17,13 +17,9 @@
         public const string UserEmail = "user@appuser.com";
 
         // Data Validations
-        public const int FirstNameMaxLength = 25;
+        public const int NameMaxLength = 25;
 
-        public const int FirstNameMinLength = 2;
-
-        public const int LastNameMaxLength = 25;
-
-        public const int LastNameMinLength = 2;
+        public const int NameMinLength = 2;
 
         public const int UserCommentMaxLength = 100;
 
@@ -33,9 +29,9 @@
 
         public const int InvoiceDescriptionMinLength = 5;
 
-        public const int DepartmentNameMaxLength = 25;
+        public const int DescriptionMinLength = 20;
 
-        public const int DepartmentNameMinLength = 2;
+        public const int DescriptionMaxLength = 500;
 
         public const int NotificationContentMaxLength = 50;
 
@@ -45,7 +41,7 @@
 
         public const int PrescriptionTreatmentMinLength = 10;
 
-        // Image strings
+        // Image strings for seeded Departments
         public const string AllergyDepartmentImage = "https://res.cloudinary.com/healthy-med/image/upload/v1670419980/departments/AlergyDepartment_p3nzrh.jpg";
 
         public const string DermatolgyDepartmentImage = "https://res.cloudinary.com/healthy-med/image/upload/v1670418109/departments/dermatology_xgff1c.jpg";

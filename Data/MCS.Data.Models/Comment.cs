@@ -8,8 +8,7 @@
     public class Comment : BaseDeletableModel<int>
     {
         [Required]
-        [MaxLength(GlobalConstants.UserCommentMaxLength)]
-        [MinLength(GlobalConstants.UserCommentMinLength)]
+        [StringLength(GlobalConstants.UserCommentMaxLength, MinimumLength = GlobalConstants.UserCommentMinLength)]
         public string UserComment { get; set; }
 
         public int? AnswerId { get; set; }

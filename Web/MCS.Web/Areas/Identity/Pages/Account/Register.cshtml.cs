@@ -72,13 +72,11 @@ namespace MCS.Web.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [Required]
-            [MinLength(GlobalConstants.FirstNameMinLength)]
-            [MaxLength(GlobalConstants.FirstNameMaxLength)]
+            [StringLength(GlobalConstants.NameMaxLength, MinimumLength = GlobalConstants.NameMinLength)]
             public string FirstName { get; set; }
 
             [Required]
-            [MinLength(GlobalConstants.LastNameMinLength)]
-            [MaxLength(GlobalConstants.LastNameMaxLength)]
+            [StringLength(GlobalConstants.NameMaxLength, MinimumLength = GlobalConstants.NameMinLength)]
             public string LastName { get; set; }
 
             public Gender Gender { get; set; }

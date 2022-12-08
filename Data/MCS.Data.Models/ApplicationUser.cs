@@ -39,13 +39,11 @@ namespace MCS.Data.Models
         public DateTime? DeletedOn { get; set; }
 
         [Required]
-        [MaxLength(GlobalConstants.FirstNameMaxLength)]
-        [MinLength(GlobalConstants.FirstNameMinLength)]
+        [StringLength(GlobalConstants.NameMaxLength, MinimumLength = GlobalConstants.NameMinLength)]
         public string FirstName { get; set; }
 
         [Required]
-        [MaxLength(GlobalConstants.LastNameMaxLength)]
-        [MinLength(GlobalConstants.LastNameMinLength)]
+        [StringLength(GlobalConstants.NameMaxLength, MinimumLength = GlobalConstants.NameMinLength)]
         public string LastName { get; set; }
 
         public Gender Gender { get; set; }

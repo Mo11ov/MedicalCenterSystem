@@ -8,8 +8,7 @@
     public class Notification : BaseDeletableModel<int>
     {
         [Required]
-        [MaxLength(GlobalConstants.NotificationContentMaxLength)]
-        [MinLength(GlobalConstants.NotificationContentMinLength)]
+        [StringLength(GlobalConstants.NotificationContentMaxLength, MinimumLength = GlobalConstants.NotificationContentMinLength)]
         public string Content { get; set; }
 
         public string Url { get; set; }

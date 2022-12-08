@@ -9,8 +9,7 @@
     public class Prescription : BaseDeletableModel<int>
     {
         [Required]
-        [MaxLength(GlobalConstants.PrescriptionTreatmentMaxLength)]
-        [MinLength(GlobalConstants.PrescriptionTreatmentMinLength)]
+        [StringLength(GlobalConstants.PrescriptionTreatmentMaxLength, MinimumLength = GlobalConstants.PrescriptionTreatmentMinLength)]
         public string Treatment { get; set; }
 
         public string DoctorsName { get; set; }
