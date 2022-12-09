@@ -7,11 +7,11 @@
     using MCS.Web.ViewModels.Department;
     using Microsoft.AspNetCore.Mvc;
 
-    public class DepartmentController : BaseController
+    public class DepartmentsController : BaseController
     {
         private readonly IDepartmentService departmentService;
 
-        public DepartmentController(IDepartmentService specialityService)
+        public DepartmentsController(IDepartmentService specialityService)
         {
             this.departmentService = specialityService;
         }
@@ -35,6 +35,4 @@
             return this.View(model);
         }
     }
-
-    
 }

@@ -4,6 +4,11 @@
 
     public class DepartmentListViewModel
     {
+        public DepartmentListViewModel()
+        {
+            this.Departments = new HashSet<DepartmentViewModel>();
+        }
+
         public IEnumerable<DepartmentViewModel> Departments { get; set; }
     }
 }

@@ -1,12 +1,12 @@
 ﻿@model DepartmentListViewModel
 @{
-    this.ViewBag.Title = "Index";
+    this.ViewData["Title"] = "Departments";
 }
 
 <hr class="bg-dark mx-4" style="height: 6px;" />
 
 <div class="text-center">
-    <h2>Departments</h2>
+    <h2>@this.ViewData["Title"]</h2>
 </div>
 <br />
 

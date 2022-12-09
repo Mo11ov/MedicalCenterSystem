@@ -1,0 +1,36 @@
+﻿@model DoctorsListViewModel
+@{
+    this.ViewData["Title"] = "Doctors";
+}
+
+<hr class="bg-dark mx-4" style="height: 6px;" />
+
+<div class="text-center">
+    <h2>@this.ViewData["Title"]</h2>
+</div>
+<br />
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model.Doctors)
+        {
+            <div class="col-md-4">
+                <div class="comment">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <img class="card-img" src="@item.ImageUrl">
+                        </div>
+                        <div class="card-body">
+                            <span class="badge badge-success mb-2">Doctor</span>
+                            <h4 class="card-title">@item.FirstName</h4>
+                            <p class="card-text">@item.LastName</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="" class="btn btn-primary">We can redirect to some action!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

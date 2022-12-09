@@ -28,8 +28,13 @@
                 <input asp-for="@Model.Image" class="form-control" type="file" id="formFileDisabled" aria-required="true" />
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
-            <div class="mb-3">
-                <input class="btn btn-dark" type="submit" value="Add" />
+            <div class="btn-group" role="group">
+                <div class="mb-3">
+                    <input class="btn btn-outline-success" type="submit" value="Add" />
+                </div>
+                <div class="mb-3 offset-4">
+                    <a class="btn btn-outline-danger" asp-area="Administration" asp-action="Index">Cancel</a>
+                </div>
             </div>
         </form>
     </div>

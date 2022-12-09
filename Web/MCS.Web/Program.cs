@@ -1,6 +1,7 @@
 namespace MCS.Web
 {
     using System.Reflection;
+
     using CloudinaryDotNet;
     using MCS.Data;
     using MCS.Data.Common;
@@ -74,6 +75,7 @@ namespace MCS.Web
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IDepartmentService, DepartmentService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IDoctorService, DoctorService>();
         }
 
         private static void Configure(WebApplication app)
