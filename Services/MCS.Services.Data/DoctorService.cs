@@ -29,7 +29,7 @@
 
             return await this.doctorsRepository
                 .AllAsNoTracking()
-                .Where(x => x.Roles.Any(r => r.RoleId == role.Id))
+                .Where(x => x.Roles.Any(r => r.RoleId == role.Id) && x.Department != null)
                 .Include(x => x.Department)
                 .ToListAsync();
         }
@@ -38,11 +38,13 @@
         {
             var role = await this.roleManager.FindByNameAsync(GlobalConstants.DoctorRoleName);
 
-            return await this.doctorsRepository
-                .AllAsNoTracking()
+            var doctors = await this.doctorsRepository
+                .All()
                 .Where(x => x.Roles.Any(r => r.RoleId == role.Id) && x.DepartmentId == departmentId)
                 .Include(x => x.Department)
                 .ToListAsync();
+
+            return doctors;
         }
 
         public async Task<ApplicationUser> GetByIdAsync(string id)

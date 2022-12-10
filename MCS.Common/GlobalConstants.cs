@@ -54,5 +54,13 @@
 
         // Count of seeded data
         public const int SeededDepartmentsCount = 5;
+
+        public const int SeededDoctorsCount = 10;
+
+        // Doctors images
+        public const string FirstDoctorImage = "https://res.cloudinary.com/healthy-med/image/upload/v1670660862/Doctors/doctors-1_kurzgv.jpg";
+        public const string SecondDoctorImage = "https://res.cloudinary.com/healthy-med/image/upload/v1670660862/Doctors/doctors-3_myxv4y.jpg";
+        public const string ThirdDoctorImage = "https://res.cloudinary.com/healthy-med/image/upload/v1670660862/Doctors/doctors-2_esrtls.jpg";
+        public const string FourthDoctorImage = "https://res.cloudinary.com/healthy-med/image/upload/v1670660862/Doctors/doctors-4_bmkd9i.jpg";
     }
 }

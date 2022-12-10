@@ -32,7 +32,29 @@
                     ImageUrl = x.ImageUrl,
                     DepartmentId = (int)x.DepartmentId,
                     DepartmentName = x.Department.Name,
-                }).ToArray(),
+                }).ToArray()
+                .OrderByDescending(x => x.DepartmentName),
+            };
+
+            return this.View(model);
+        }
+
+        public async Task<IActionResult> DoctorsByDepartment(int departmentId)
+        {
+            var doctors = await this.doctorService.GetAllByDepartmentAsync(departmentId);
+
+            var model = new DoctorsListViewModel
+            {
+                Doctors = doctors
+               .Select(x => new DoctorViewModel
+               {
+                   Id = x.Id,
+                   FirstName = x.FirstName,
+                   LastName = x.LastName,
+                   ImageUrl = x.ImageUrl,
+                   DepartmentId = (int)x.DepartmentId,
+                   DepartmentName = x.Department.Name,
+               }).ToArray(),
             };
 
             return this.View(model);
