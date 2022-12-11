@@ -39,6 +39,7 @@
             return this.View(model);
         }
 
+        [HttpGet]
         public async Task<IActionResult> DoctorsByDepartment(int departmentId)
         {
             var doctors = await this.doctorService.GetAllByDepartmentAsync(departmentId);

@@ -1,13 +1,13 @@
 ﻿namespace MCS.Services.Data
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using MCS.Data.Models;
+    using MCS.Web.ViewModels.Department;
 
     public interface IDepartmentService
     {
-        Task<IEnumerable<Department>> GetAllAsync();
+        Task<DepartmentListViewModel> GetAllAsync();
 
         Task<Department> GetByIdAsync(int id);
 

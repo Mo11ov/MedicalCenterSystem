@@ -76,6 +76,7 @@ namespace MCS.Web
             services.AddTransient<IDepartmentService, DepartmentService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IDoctorService, DoctorService>();
+            services.AddTransient<IAppointmentService, AppointmentService>();
         }
 
         private static void Configure(WebApplication app)

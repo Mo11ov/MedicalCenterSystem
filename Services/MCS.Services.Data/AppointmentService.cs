@@ -8,6 +8,7 @@
 
     using MCS.Data.Common.Repositories;
     using MCS.Data.Models;
+    using Microsoft.EntityFrameworkCore;
 
     public class AppointmentService : IAppointmentService
     {
@@ -53,6 +54,15 @@
         public Task<Appointment> GetByIdAsync()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Appointment>> GetByPatientAsync(string patientId)
+        {
+            return await this.appointmentRepository
+                .All()
+                .Where(x => x.PatientId == patientId)
+                .OrderBy(x => x.DateTime)
+                .ToListAsync();
         }
     }
 }

@@ -26,7 +26,7 @@
                             <p class="card-text">Speciallity: @item.DepartmentName</p>
                         </div>
                         <div class="card-footer">
-                            <a href="" class="btn btn-primary">We can redirect to some action!</a>
+                            <a asp-controller="Appointments" asp-action="MakeAppointment" asp-route-DoctorId="@item.Id" class="btn btn-primary">Make an appointment</a>
                         </div>
                     </div>
                 </div>

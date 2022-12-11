@@ -27,19 +27,7 @@
         {
             var departments = await this.departmentService.GetAllAsync();
 
-            var model = new DepartmentListViewModel
-            {
-                Departments = departments
-                .Select(s => new DepartmentViewModel
-                {
-                    Id = s.Id,
-                    Name = s.Name,
-                    Description = s.Description,
-                    ImageUrl = s.ImageUrl,
-                }).ToArray(),
-            };
-
-            return this.View(model);
+            return this.View(departments);
         }
 
         [HttpGet]

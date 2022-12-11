@@ -14,6 +14,8 @@
 
         Task<IEnumerable<Appointment>> GetByDoctorAsync(string doctorId);
 
+        Task<IEnumerable<Appointment>> GetByPatientAsync(string patientId);
+
         Task ConfirmAsync(int id);
 
         Task DeleteAsync(int id);

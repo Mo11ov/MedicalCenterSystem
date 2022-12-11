@@ -1,10 +1,12 @@
 ﻿namespace MCS.Services.Data
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using MCS.Data.Common.Repositories;
     using MCS.Data.Models;
+    using MCS.Web.ViewModels.Department;
     using Microsoft.EntityFrameworkCore;
 
     public class DepartmentService : IDepartmentService
@@ -39,9 +41,23 @@
             await this.departmentRepository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Department>> GetAllAsync()
+        public async Task<DepartmentListViewModel> GetAllAsync()
         {
-            return await this.departmentRepository.AllAsNoTracking().ToListAsync();
+            var departments = await this.departmentRepository.AllAsNoTracking().ToListAsync();
+
+            var departmentsModel = new DepartmentListViewModel
+            {
+                Departments = departments
+                .Select(s => new DepartmentViewModel
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    Description = s.Description,
+                    ImageUrl = s.ImageUrl,
+                }).ToArray(),
+            };
+
+            return departmentsModel;
         }
 
         public async Task<Department> GetByIdAsync(int id)
