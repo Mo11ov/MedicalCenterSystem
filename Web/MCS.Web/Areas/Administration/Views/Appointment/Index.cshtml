@@ -1,7 +1,7 @@
 ﻿@model AppointmentListViewModel
 
 @{
-    this.ViewData["Title"] = "My Apointments";
+    this.ViewData["Title"] = "All Apointments";
 }
 
 <hr class="bg-dark mx-4" style="height: 6px;" />
@@ -41,8 +41,8 @@
                     {
                         <form method="post">
                             <button type="submit" class="btn btn-danger btn-sm"
-                            asp-controller="Appointments" asp-action="CancelAppointment" asp-route-id="@appointment.Id">
-                                Delete
+                            asp-area="administration" asp-controller="Appointment" asp-action="CancelAppointment" asp-route-id="@appointment.Id">
+                                Cancel
                             </button>
                         </form>
                     }

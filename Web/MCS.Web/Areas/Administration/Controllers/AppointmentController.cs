@@ -21,5 +21,13 @@
 
             return this.View(allApointments);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CancelAppointment(int id)
+        {
+            await this.appointmentService.DeleteAsync(id);
+
+            return this.RedirectToAction(nameof(this.Index));
+        }
     }
 }
