@@ -54,24 +54,77 @@
             return appointmentModel;
         }
 
-        public Task<AppointmentListViewModel> GetByUserAsync(string userId)
+        public async Task<Appointment> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await this.appointmentRepository.AllAsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<Appointment> GetByIdAsync()
+        public async Task ConfirmAsync(int id)
         {
-            throw new NotImplementedException();
+            var appointment = await this.appointmentRepository.AllAsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+
+            appointment.IsConfirmed = true;
+
+            await this.appointmentRepository.SaveChangesAsync();
         }
 
-        public Task ConfirmAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var appointment = await this.appointmentRepository.AllAsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+
+            this.appointmentRepository.Delete(appointment);
+
+            await this.appointmentRepository.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task<AppointmentListViewModel> GetByPatientAsync(string patientId)
         {
-            throw new NotImplementedException();
+            var appointments = await this.appointmentRepository
+                .AllAsNoTracking()
+                .Where(x => x.Patient.Id == patientId)
+                .ToListAsync();
+
+            var appointmentModel = new AppointmentListViewModel
+            {
+                Appointments = appointments
+                .Select(x => new AppointmentViewModel
+                {
+                    Id = x.Id,
+                    PatientName = x.Patient.FirstName + " " + x.Patient.LastName,
+                    DoctorName = x.Doctor.FirstName + " " + x.Doctor.LastName,
+                    Date = x.DateTime.ToString("MMMM dd"),
+                    Time = x.DateTime.ToString("h:mm tt"),
+                }).ToArray()
+                .OrderBy(x => x.Date)
+                .ThenBy(x => x.Time),
+            };
+
+            return appointmentModel;
+        }
+
+        public async Task<AppointmentListViewModel> GetByDoctorAsync(string doctorId)
+        {
+            var appointments = await this.appointmentRepository
+                .AllAsNoTracking()
+                .Where(x => x.Doctor.Id == doctorId)
+                .ToListAsync();
+
+            var appointmentModel = new AppointmentListViewModel
+            {
+                Appointments = appointments
+                .Select(x => new AppointmentViewModel
+                {
+                    Id = x.Id,
+                    PatientName = x.Patient.FirstName + " " + x.Patient.LastName,
+                    DoctorName = x.Doctor.FirstName + " " + x.Doctor.LastName,
+                    Date = x.DateTime.ToString("MMMM dd"),
+                    Time = x.DateTime.ToString("h:mm tt"),
+                }).ToArray()
+                .OrderBy(x => x.Date)
+                .ThenBy(x => x.Time),
+            };
+
+            return appointmentModel;
         }
     }
 }

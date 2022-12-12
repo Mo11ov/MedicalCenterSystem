@@ -10,9 +10,11 @@
     {
         Task<AppointmentListViewModel> GetAllAsync();
 
-        Task<AppointmentListViewModel> GetByUserAsync(string userId);
+        Task<AppointmentListViewModel> GetByPatientAsync(string patientId);
 
-        Task<Appointment> GetByIdAsync();
+        Task<AppointmentListViewModel> GetByDoctorAsync(string doctorId);
+
+        Task<Appointment> GetByIdAsync(int id);
 
         Task ConfirmAsync(int id);
 
