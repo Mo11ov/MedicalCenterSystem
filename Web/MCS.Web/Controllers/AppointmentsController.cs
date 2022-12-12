@@ -31,7 +31,7 @@
         {
             var user = await this.userManager.GetUserAsync(this.HttpContext.User);
             var userId = await this.userManager.GetUserIdAsync(user);
-            var appointments = await this.appointmentsService.GetByUserAsync(userId);
+            var appointments = await this.appointmentsService.GetByPatientAsync(userId);
 
             return this.View(appointments);
         }
@@ -59,6 +59,14 @@
             var patientId = await this.userManager.GetUserIdAsync(user);
 
             await this.appointmentsService.AddAsync(patientId, model.DoctorId, model.Date);
+
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CancelAppointment(int id)
+        {
+            await this.appointmentsService.DeleteAsync(id);
 
             return this.RedirectToAction(nameof(this.Index));
         }

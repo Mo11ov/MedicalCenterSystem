@@ -1,10 +1,8 @@
 ﻿namespace MCS.Web.Controllers
 {
-    using System.Linq;
     using System.Threading.Tasks;
 
     using MCS.Services.Data;
-    using MCS.Web.ViewModels.Doctor;
     using Microsoft.AspNetCore.Mvc;
 
     public class DoctorsController : BaseController

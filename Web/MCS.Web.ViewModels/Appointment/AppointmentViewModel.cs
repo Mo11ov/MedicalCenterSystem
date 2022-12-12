@@ -11,5 +11,9 @@
         public string PatientName { get; set; }
 
         public string DoctorName { get; set; }
+
+        public string DoctorSpeciallity { get; set; }
+
+        public bool IsConfirmed { get; set; }
     }
 }

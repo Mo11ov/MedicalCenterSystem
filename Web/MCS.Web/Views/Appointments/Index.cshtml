@@ -1,0 +1,51 @@
+﻿@model AppointmentListViewModel
+
+@{
+    this.ViewData["Title"] = "My Apointments";
+}
+
+<hr class="bg-dark mx-4" style="height: 6px;" />
+
+<h2>
+    All Appointments
+</h2>
+<br />
+<table class="table table-bordered table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col" class="text-center">Doctor name</th>
+            <th scope="col" class="text-center">Doctor speciallity</th>
+            <th scope="col" class="text-center">Date of the appointment</th>
+            <th scope="col" class="text-center">Hour of the appointment</th>
+            <th scope="col">Delete button</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var appointment in this.Model.Appointments)
+        {
+            <tr>
+                <th scope="row">Dr. @appointment.DoctorName</th>
+                <th scope="row">@appointment.DoctorSpeciallity</th>
+                <th scope="row" class="text-center">@appointment.Date</th>
+                <th scope="row" class="text-center">@appointment.Time</th>
+                <td>
+                    @if (appointment.IsConfirmed == true)
+                    {
+                        <div class="text-muted" style="font-size:smaller">
+                            Cannot Cancel <br />Confirmed appointments
+                        </div>
+                    }
+                    else
+                    {
+                        <form method="post">
+                            <button type="submit" class="btn btn-danger btn-sm"
+                            asp-controller="Appointments" asp-action="CancelAppointment" asp-route-id="@appointment.Id">
+                                Delete
+                            </button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
