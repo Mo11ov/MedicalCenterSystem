@@ -21,22 +21,7 @@
         {
             var doctors = await this.doctorService.GetAllAsync();
 
-            var model = new DoctorsListViewModel
-            {
-                Doctors = doctors
-                .Select(x => new DoctorViewModel
-                {
-                    Id = x.Id,
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
-                    ImageUrl = x.ImageUrl,
-                    DepartmentId = (int)x.DepartmentId,
-                    DepartmentName = x.Department.Name,
-                }).ToArray()
-                .OrderByDescending(x => x.DepartmentName),
-            };
-
-            return this.View(model);
+            return this.View(doctors);
         }
 
         [HttpGet]
@@ -44,21 +29,7 @@
         {
             var doctors = await this.doctorService.GetAllByDepartmentAsync(departmentId);
 
-            var model = new DoctorsListViewModel
-            {
-                Doctors = doctors
-               .Select(x => new DoctorViewModel
-               {
-                   Id = x.Id,
-                   FirstName = x.FirstName,
-                   LastName = x.LastName,
-                   ImageUrl = x.ImageUrl,
-                   DepartmentId = (int)x.DepartmentId,
-                   DepartmentName = x.Department.Name,
-               }).ToArray(),
-            };
-
-            return this.View(model);
+            return this.View(doctors);
         }
     }
 }

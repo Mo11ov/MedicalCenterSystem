@@ -1,17 +1,16 @@
 ﻿namespace MCS.Services.Data
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using MCS.Data.Models;
+    using MCS.Web.ViewModels.Doctor;
 
     public interface IDoctorService
     {
-        Task<IEnumerable<ApplicationUser>> GetAllAsync();
+        Task<DoctorsListViewModel> GetAllAsync();
 
-        Task<IEnumerable<ApplicationUser>> GetAllByDepartmentAsync(int departmentId);
+        Task<DoctorsListViewModel> GetAllByDepartmentAsync(int departmentId);
 
-        Task<ApplicationUser> GetByIdAsync(string id);
+        Task<DoctorViewModel> GetByIdAsync(string id);
 
         Task DeleteAsync(string id);
     }

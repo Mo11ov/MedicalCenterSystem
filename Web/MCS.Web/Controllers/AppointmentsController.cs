@@ -14,12 +14,15 @@
     {
         private readonly IAppointmentService appointmentsService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IDoctorService doctorService;
 
         public AppointmentsController(
             IAppointmentService appointmentsService,
+            IDoctorService doctorService,
             UserManager<ApplicationUser> userManager)
         {
             this.appointmentsService = appointmentsService;
+            this.doctorService = doctorService;
             this.userManager = userManager;
         }
 
@@ -34,11 +37,11 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> MakeAppointment(string doctorId)
+        public async Task<IActionResult> MakeAppointment()
         {
             var model = new AppointmentInputModel
             {
-                DoctorId = doctorId,
+                Doctors = await this.doctorService.GetAllAsync(),
             };
 
             return this.View(model);
@@ -49,7 +52,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.RedirectToAction(nameof(this.MakeAppointment), new { model.DoctorId });
+                return this.RedirectToAction(nameof(this.MakeAppointment));
             }
 
             var user = await this.userManager.GetUserAsync(this.HttpContext.User);

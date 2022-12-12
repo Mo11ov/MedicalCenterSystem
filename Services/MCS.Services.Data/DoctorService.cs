@@ -1,12 +1,12 @@
 ﻿namespace MCS.Services.Data
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using MCS.Common;
     using MCS.Data.Common.Repositories;
     using MCS.Data.Models;
+    using MCS.Web.ViewModels.Doctor;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
@@ -23,18 +23,35 @@
             this.roleManager = roleManager;
         }
 
-        public async Task<IEnumerable<ApplicationUser>> GetAllAsync()
+        public async Task<DoctorsListViewModel> GetAllAsync()
         {
             var role = await this.roleManager.FindByNameAsync(GlobalConstants.DoctorRoleName);
 
-            return await this.doctorsRepository
+            var doctors = await this.doctorsRepository
                 .AllAsNoTracking()
                 .Where(x => x.Roles.Any(r => r.RoleId == role.Id) && x.Department != null)
                 .Include(x => x.Department)
                 .ToListAsync();
+
+            var doctrosModel = new DoctorsListViewModel
+            {
+                Doctors = doctors
+                .Select(x => new DoctorViewModel
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    ImageUrl = x.ImageUrl,
+                    DepartmentId = (int)x.DepartmentId,
+                    DepartmentName = x.Department.Name,
+                }).ToArray()
+                .OrderByDescending(x => x.DepartmentName),
+            };
+
+            return doctrosModel;
         }
 
-        public async Task<IEnumerable<ApplicationUser>> GetAllByDepartmentAsync(int departmentId)
+        public async Task<DoctorsListViewModel> GetAllByDepartmentAsync(int departmentId)
         {
             var role = await this.roleManager.FindByNameAsync(GlobalConstants.DoctorRoleName);
 
@@ -44,15 +61,41 @@
                 .Include(x => x.Department)
                 .ToListAsync();
 
-            return doctors;
+            var doctorsModel = new DoctorsListViewModel
+            {
+                Doctors = doctors
+               .Select(x => new DoctorViewModel
+               {
+                   Id = x.Id,
+                   FirstName = x.FirstName,
+                   LastName = x.LastName,
+                   ImageUrl = x.ImageUrl,
+                   DepartmentId = (int)x.DepartmentId,
+                   DepartmentName = x.Department.Name,
+               }).ToArray(),
+            };
+
+            return doctorsModel;
         }
 
-        public async Task<ApplicationUser> GetByIdAsync(string id)
+        public async Task<DoctorViewModel> GetByIdAsync(string id)
         {
-            return await this.doctorsRepository.AllAsNoTracking()
+            var doctor = await this.doctorsRepository.AllAsNoTracking()
                 .Where(x => x.Id == id)
                 .Include(x => x.Department)
                 .FirstOrDefaultAsync();
+
+            var doctorModel = new DoctorViewModel
+            {
+                Id = doctor.Id,
+                FirstName = doctor.FirstName,
+                LastName = doctor.LastName,
+                ImageUrl = doctor.ImageUrl,
+                DepartmentId = (int)doctor.DepartmentId,
+                DepartmentName = doctor.Department.Name,
+            };
+
+            return doctorModel;
         }
 
         public async Task DeleteAsync(string id)
