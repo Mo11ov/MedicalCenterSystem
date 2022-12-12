@@ -34,6 +34,7 @@
         {
             var appointments = await this.appointmentRepository
                 .AllAsNoTracking()
+                .Include(x => x.Patient)
                 .Include(x => x.Doctor)
                 .ThenInclude(d => d.Department)
                 .ToListAsync();

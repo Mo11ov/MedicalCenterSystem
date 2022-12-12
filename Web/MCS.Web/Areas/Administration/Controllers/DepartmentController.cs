@@ -1,6 +1,5 @@
 ﻿namespace MCS.Web.Areas.Administration.Controllers
 {
-    using System.Linq;
     using System.Threading.Tasks;
 
     using MCS.Common;
