@@ -1,20 +1,18 @@
 ﻿namespace MCS.Services.Data
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using MCS.Data.Models;
+    using MCS.Web.ViewModels.Appointment;
 
     public interface IAppointmentService
     {
+        Task<AppointmentListViewModel> GetAllAsync();
+
+        Task<AppointmentListViewModel> GetByUserAsync(string userId);
+
         Task<Appointment> GetByIdAsync();
-
-        Task<IEnumerable<Appointment>> GetAllAsync();
-
-        Task<IEnumerable<Appointment>> GetByDoctorAsync(string doctorId);
-
-        Task<IEnumerable<Appointment>> GetByPatientAsync(string patientId);
 
         Task ConfirmAsync(int id);
 

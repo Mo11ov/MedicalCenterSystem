@@ -78,24 +78,12 @@
             return doctorsModel;
         }
 
-        public async Task<DoctorViewModel> GetByIdAsync(string id)
+        public async Task<ApplicationUser> GetByIdAsync(string id)
         {
-            var doctor = await this.doctorsRepository.AllAsNoTracking()
+            return await this.doctorsRepository.AllAsNoTracking()
                 .Where(x => x.Id == id)
                 .Include(x => x.Department)
                 .FirstOrDefaultAsync();
-
-            var doctorModel = new DoctorViewModel
-            {
-                Id = doctor.Id,
-                FirstName = doctor.FirstName,
-                LastName = doctor.LastName,
-                ImageUrl = doctor.ImageUrl,
-                DepartmentId = (int)doctor.DepartmentId,
-                DepartmentName = doctor.Department.Name,
-            };
-
-            return doctorModel;
         }
 
         public async Task DeleteAsync(string id)

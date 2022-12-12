@@ -29,9 +29,9 @@
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var patient = await this.userManager.GetUserAsync(this.HttpContext.User);
-            var patientId = await this.userManager.GetUserIdAsync(patient);
-            var appointments = await this.appointmentsService.GetByPatientAsync(patientId);
+            var user = await this.userManager.GetUserAsync(this.HttpContext.User);
+            var userId = await this.userManager.GetUserIdAsync(user);
+            var appointments = await this.appointmentsService.GetByUserAsync(userId);
 
             return this.View(appointments);
         }

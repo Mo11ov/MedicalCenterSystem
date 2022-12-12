@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\MCS.Data.Models\MCS.Data.Models.csproj" />
     <ProjectReference Include="..\..\Services\MCS.Services.Mapping\MCS.Services.Mapping.csproj" />
+    <ProjectReference Include="..\MCS.Web.Infrastructure\MCS.Web.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

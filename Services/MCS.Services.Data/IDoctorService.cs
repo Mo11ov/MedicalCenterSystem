@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
 
+    using MCS.Data.Models;
     using MCS.Web.ViewModels.Doctor;
 
     public interface IDoctorService
@@ -10,7 +11,7 @@
 
         Task<DoctorsListViewModel> GetAllByDepartmentAsync(int departmentId);
 
-        Task<DoctorViewModel> GetByIdAsync(string id);
+        Task<ApplicationUser> GetByIdAsync(string id);
 
         Task DeleteAsync(string id);
     }
