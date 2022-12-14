@@ -18,6 +18,8 @@
 
         Task ConfirmAsync(int id);
 
+        Task CancelAsync(int id);
+
         Task DeleteAsync(int id);
 
         Task AddAsync(string userId, string doctorId, DateTime dateTime);

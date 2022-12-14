@@ -73,6 +73,15 @@
             await this.appointmentRepository.SaveChangesAsync();
         }
 
+        public async Task CancelAsync(int id)
+        {
+            var appointment = await this.appointmentRepository.All().FirstOrDefaultAsync(x => x.Id == id);
+
+            appointment.IsConfirmed = false;
+
+            await this.appointmentRepository.SaveChangesAsync();
+        }
+
         public async Task DeleteAsync(int id)
         {
             var appointment = await this.appointmentRepository.All().FirstOrDefaultAsync(x => x.Id == id);

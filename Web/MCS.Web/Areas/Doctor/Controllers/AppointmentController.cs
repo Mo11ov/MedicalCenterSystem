@@ -26,7 +26,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> CancelAppointment(int id)
+        public async Task<IActionResult> DeleteAppointment(int id)
         {
             var appointment = await this.appointmentService.GetByIdAsync(id);
 
@@ -44,6 +44,14 @@
         public async Task<IActionResult> ConfirmAppointment(int id)
         {
             await this.appointmentService.ConfirmAsync(id);
+
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CancelAppointment(int id)
+        {
+            await this.appointmentService.CancelAsync(id);
 
             return this.RedirectToAction(nameof(this.Index));
         }

@@ -63,6 +63,14 @@
         }
 
         [HttpPost]
+        public async Task<IActionResult> DeleteAppointment(int id)
+        {
+            await this.appointmentsService.DeleteAsync(id);
+
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
+        [HttpPost]
         public async Task<IActionResult> CancelAppointment(int id)
         {
             await this.appointmentsService.DeleteAsync(id);
