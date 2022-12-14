@@ -65,14 +65,14 @@
         [HttpPost]
         public async Task<IActionResult> DeleteAppointment(int id)
         {
-            await this.appointmentsService.DeleteAsync(id);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var appointment = await this.appointmentsService.GetByIdAsync(id);
 
-            return this.RedirectToAction(nameof(this.Index));
-        }
+            if (appointment.PatientId != userId)
+            {
+                return this.RedirectToAction(nameof(this.Index));
+            }
 
-        [HttpPost]
-        public async Task<IActionResult> CancelAppointment(int id)
-        {
             await this.appointmentsService.DeleteAsync(id);
 
             return this.RedirectToAction(nameof(this.Index));

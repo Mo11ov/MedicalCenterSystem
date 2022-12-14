@@ -1,10 +1,9 @@
 ﻿namespace MCS.Services.Data
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using MCS.Data.Models;
+    using MCS.Web.ViewModels.Presription;
 
     public interface IPrescriptionService
     {
@@ -12,8 +11,8 @@
 
         Task DeleteAsync(int id);
 
-        Task<IEnumerable<Prescription>> GetAllAsync();
+        Task<PrescriptionListViewModel> GetAllAsync();
 
-        Task<IEnumerable<Prescription>> GetAllByUserAsync(string userId);
+        Task<PrescriptionListViewModel> GetAllByUserAsync(string userId);
     }
 }

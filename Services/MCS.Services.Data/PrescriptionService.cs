@@ -1,11 +1,12 @@
 ﻿namespace MCS.Services.Data
 {
     using System;
-    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using MCS.Data.Common.Repositories;
     using MCS.Data.Models;
+    using MCS.Web.ViewModels.Presription;
     using Microsoft.EntityFrameworkCore;
 
     public class PrescriptionService : IPrescriptionService
@@ -37,14 +38,49 @@
             await this.prescriptionRepository.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Prescription>> GetAllAsync()
+        public async Task<PrescriptionListViewModel> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var prescriptions = await this.prescriptionRepository
+                .AllAsNoTracking()
+                .Include(x => x.Patient)
+                .ToListAsync();
+
+            var prescriptionModel = new PrescriptionListViewModel
+            {
+                Prescriptions = prescriptions.Select(x => new PrescriptionViewModel 
+                {
+                    PatientId = x.PatientId,
+                    DoctorName = x.DoctorsName,
+                    Treatment = x.Treatment,
+                    IssuedDate = x.IssuedDate.ToString("MMMM dd"),
+                    IssuedTime = x.IssuedDate.ToString("h:mm tt"),
+                }),
+            };
+
+            return prescriptionModel;
         }
 
-        public Task<IEnumerable<Prescription>> GetAllByUserAsync(string userId)
+        public async Task<PrescriptionListViewModel> GetAllByUserAsync(string userId)
         {
-            throw new NotImplementedException();
+            var prescriptions = await this.prescriptionRepository
+                .AllAsNoTracking()
+                .Where(x => x.PatientId == userId)
+                .Include(x => x.Patient)
+                .ToListAsync();
+
+            var prescriptionModel = new PrescriptionListViewModel
+            {
+                Prescriptions = prescriptions.Select(x => new PrescriptionViewModel
+                {
+                    PatientId = x.PatientId,
+                    DoctorName = x.DoctorsName,
+                    Treatment = x.Treatment,
+                    IssuedDate = x.IssuedDate.ToString("MMMM dd"),
+                    IssuedTime = x.IssuedDate.ToString("h:mm tt"),
+                }),
+            };
+
+            return prescriptionModel;
         }
     }
 }
