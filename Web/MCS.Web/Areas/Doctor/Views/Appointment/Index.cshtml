@@ -1,0 +1,76 @@
+﻿@model AppointmentListViewModel
+
+@{
+    this.ViewData["Title"] = "All Appointments";
+}
+<br />
+<h2 class="text-center">@this.ViewData["Title"]</h2>
+<hr />
+
+<div class="container">
+    <input class="form-control mb-4" id="tableSearch" type="text"
+           placeholder="You can search by: Patient name, Date or Hour ">
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="text-center">Patient Name</th>
+                <th class="text-center">Appointment Date</th>
+                <th class="text-center">Appointment Hour</th>
+                <th class="text-center">Confirm Button</th>
+                <th class="text-center">Delete Button</th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @foreach (var appointment in Model.Appointments)
+            {
+                <tr>
+                    <td class="text-center">@appointment.PatientName</td>
+                    <td class="text-center">@appointment.Date</td>
+                    <td class="text-center">@appointment.Time</td>
+                    <td>
+                        @if (appointment.IsConfirmed == true)
+                        {
+                            <div class="text-muted" style="font-size:smaller">
+                                Cannot confirm <br />Already confirmed appointments
+                            </div>
+                        }
+                        else
+                        {
+                            <form method="post" class="text-center">
+                                <button type="submit" class="btn btn-outline-success"
+                                asp-area="Doctor" asp-controller="Appointment" asp-action="ConfirmAppointment" asp-route-id="@appointment.Id">
+                                    Confirm Appointment
+                                </button>
+                            </form>
+                        }
+                    </td>
+                    <td>
+                        <form method="post" class="text-center">
+                            <button type="submit" class="btn btn-outline-danger"
+                                asp-area="Doctor" asp-controller="Appointment" asp-action="CancelAppointment" asp-route-id="@appointment.Id">
+                                Delete Appointment
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts
+    {
+    <script>
+        @*// Filter table*@
+
+            $(document).ready(function () {
+                $("#tableSearch").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+    </script>
+}

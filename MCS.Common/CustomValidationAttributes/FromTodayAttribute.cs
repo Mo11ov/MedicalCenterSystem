@@ -9,7 +9,7 @@
         {
             DateTime date = Convert.ToDateTime(value);
 
-            if (DateTime.Compare(date, DateTime.Now) < 0)
+            if (DateTime.Compare(date, DateTime.Now) > 0)
             {
                 return true;
             }

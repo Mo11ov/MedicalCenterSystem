@@ -66,7 +66,7 @@
 
         public async Task ConfirmAsync(int id)
         {
-            var appointment = await this.appointmentRepository.AllAsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            var appointment = await this.appointmentRepository.All().FirstOrDefaultAsync(x => x.Id == id);
 
             appointment.IsConfirmed = true;
 
@@ -75,7 +75,7 @@
 
         public async Task DeleteAsync(int id)
         {
-            var appointment = await this.appointmentRepository.AllAsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            var appointment = await this.appointmentRepository.All().FirstOrDefaultAsync(x => x.Id == id);
 
             this.appointmentRepository.Delete(appointment);
 

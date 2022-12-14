@@ -1,5 +1,6 @@
 ﻿namespace MCS.Web.Controllers
 {
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using MCS.Data.Models;
@@ -13,7 +14,6 @@
     public class AppointmentsController : BaseController
     {
         private readonly IAppointmentService appointmentsService;
-        private readonly UserManager<ApplicationUser> userManager;
         private readonly IDoctorService doctorService;
 
         public AppointmentsController(
@@ -23,14 +23,13 @@
         {
             this.appointmentsService = appointmentsService;
             this.doctorService = doctorService;
-            this.userManager = userManager;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var user = await this.userManager.GetUserAsync(this.HttpContext.User);
-            var userId = await this.userManager.GetUserIdAsync(user);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var appointments = await this.appointmentsService.GetByPatientAsync(userId);
 
             return this.View(appointments);
@@ -52,11 +51,11 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.RedirectToAction(nameof(this.MakeAppointment));
+                model.Doctors = await this.doctorService.GetAllAsync();
+                return this.View(model);
             }
 
-            var user = await this.userManager.GetUserAsync(this.HttpContext.User);
-            var patientId = await this.userManager.GetUserIdAsync(user);
+            var patientId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             await this.appointmentsService.AddAsync(patientId, model.DoctorId, model.Date);
 

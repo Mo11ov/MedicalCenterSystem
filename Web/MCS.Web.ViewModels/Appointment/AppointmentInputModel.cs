@@ -8,7 +8,7 @@
 
     public class AppointmentInputModel
     {
-        [FromToday(ErrorMessage = "Date must be past")]
+        [FromToday(ErrorMessage = "Date must be past now")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime Date { get; set; }
 
