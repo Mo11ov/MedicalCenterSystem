@@ -1,0 +1,87 @@
+﻿@model UserListViewModel
+
+@{
+    this.ViewData["Title"] = "All Users";
+}
+<br/>
+<h2 class="text-center">@this.ViewData["Title"]</h2>
+<hr />
+
+<div class="container">
+    <input class="form-control mb-4" id="tableSearch" type="text"
+           placeholder="Type user name to search">
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="text-center">Firstname</th>
+                <th class="text-center">Lastname</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">User role</th>
+                <th class="text-center">Delete User</th>
+                <th class="text-center">Give Doctor Role</th>
+                <th class="text-center">Remove Doctor Role</th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td class="text-center">@user.FirstName</td>
+                    <td class="text-center">@user.LastName</td>
+                    <td class="text-center">@user.Email</td>
+                    <td class="text-center">@user.Role</td>
+                    <td>
+                        <form method="post" class="text-center">
+                            <button type="submit" class="btn btn-outline-danger"
+                                asp-area="Administration" asp-controller="User" asp-action="DeleteUser" asp-route-id="@user.Id">
+                                Delete User
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        @if (user.Role == GlobalConstants.DoctorRoleName)
+                        {
+                            <div class="text-muted" style="font-size:smaller">
+                                Doctor role cannot be given <br />to a user who is already a doctor
+                            </div>
+                        }
+                        else
+                        {
+                            <form method="post" class="text-center">
+                                <button type="submit" class="btn btn-outline-warning"
+                                asp-area="Administration" asp-controller="User" asp-action="AssignDoctorRole" asp-route-id="@user.Id">
+                                    Give Doctor Role
+                                </button>
+                            </form>
+                        }
+                    </td>
+                    <td>
+                        <form method="post" class="text-center">
+                            <button type="submit" class="btn btn-outline-warning"
+                                asp-area="Administration" asp-controller="User" asp-action="RemoveDoctorRole" asp-route-id="@user.Id">
+                                Remove Doctor Role
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<hr />
+@section Scripts
+    {
+    <script>
+        @*// Filter table*@
+
+            $(document).ready(function () {
+                $("#tableSearch").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+    </script>
+}

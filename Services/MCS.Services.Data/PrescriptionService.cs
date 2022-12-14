@@ -8,7 +8,7 @@
     using MCS.Data.Models;
     using Microsoft.EntityFrameworkCore;
 
-    internal class PrescriptionService : IPrescriptionService
+    public class PrescriptionService : IPrescriptionService
     {
         private readonly IDeletableEntityRepository<Prescription> prescriptionRepository;
 

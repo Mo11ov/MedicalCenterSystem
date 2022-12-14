@@ -1,53 +1,71 @@
 ﻿@model AppointmentListViewModel
 
 @{
-    this.ViewData["Title"] = "All Apointments";
+    this.ViewData["Title"] = "All Appointments";
 }
-
-<hr class="bg-dark mx-4" style="height: 6px;" />
-
-<h2>
-    All Appointments
-</h2>
 <br />
-<table class="table table-bordered table-striped">
-    <thead class="thead-light">
-        <tr>
-            <th scope="col" class="text-center">Patient name</th>
-            <th scope="col" class="text-center">Doctor name</th>
-            <th scope="col" class="text-center">Doctor speciallity</th>
-            <th scope="col" class="text-center">Date of the appointment</th>
-            <th scope="col" class="text-center">Hour of the appointment</th>
-            <th scope="col">Delete button</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var appointment in this.Model.Appointments)
-        {
+<h2 class="text-center">@this.ViewData["Title"]</h2>
+<hr />
+
+<div class="container">
+    <input class="form-control mb-4" id="tableSearch" type="text"
+           placeholder="Type user name to search">
+
+    <table class="table table-bordered table-striped">
+        <thead>
             <tr>
-                <th scope="row">@appointment.PatientName</th>
-                <th scope="row">Dr. @appointment.DoctorName</th>
-                <th scope="row">@appointment.DoctorSpeciallity</th>
-                <th scope="row" class="text-center">@appointment.Date</th>
-                <th scope="row" class="text-center">@appointment.Time</th>
-                <td>
-                    @if (appointment.IsConfirmed == true)
-                    {
-                        <div class="text-muted" style="font-size:smaller">
-                            Cannot Cancel <br />Confirmed appointments
-                        </div>
-                    }
-                    else
-                    {
-                        <form method="post">
-                            <button type="submit" class="btn btn-danger btn-sm"
-                            asp-area="administration" asp-controller="Appointment" asp-action="CancelAppointment" asp-route-id="@appointment.Id">
-                                Cancel
-                            </button>
-                        </form>
-                    }
-                </td>
+                <th class="text-center">Patient Name</th>
+                <th class="text-center">Doctor Name</th>
+                <th class="text-center">Doctor Speciallity</th>
+                <th class="text-center">Appointment Date</th>
+                <th class="text-center">Appointment Hour</th>
+                <th class="text-center">Delete Button</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody id="myTable">
+            @foreach (var appointment in Model.Appointments)
+            {
+                <tr>
+                    <td class="text-center">@appointment.PatientName</td>
+                    <td class="text-center">@appointment.DoctorName</td>
+                    <td class="text-center">@appointment.DoctorSpeciallity</td>
+                    <td class="text-center">@appointment.Date</td>
+                    <td class="text-center">@appointment.Time</td>
+                    <td>
+                        @if (appointment.IsConfirmed == true)
+                        {
+                            <div class="text-muted" style="font-size:smaller">
+                                Cannot Cancel <br />Confirmed appointments
+                            </div>
+                        }
+                        else
+                        {
+                            <form method="post" class="text-center">
+                                <button type="submit" class="btn btn-outline-danger"
+                                asp-area="administration" asp-controller="Appointment" asp-action="CancelAppointment" asp-route-id="@appointment.Id">
+                                    Delete Appointment
+                                </button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts
+    {
+    <script>
+        @*// Filter table*@
+
+            $(document).ready(function () {
+                $("#tableSearch").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+    </script>
+}

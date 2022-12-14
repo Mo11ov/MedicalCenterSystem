@@ -1,16 +1,16 @@
 ﻿@model DepartmentListViewModel
 
 @{
-    this.ViewData["Title"] = "Departments";
+    this.ViewData["Title"] = "All Departments";
 }
-
+<br />
 <h2>
-    All Deparments
+    @this.ViewData["Title"]
     <span>
-        <a class="btn btn-success" asp-area="Administration" asp-controller="Department" asp-action="AddDepartment">Add New Department</a>
+        <a class="btn btn-outline-success offset-1" asp-area="Administration" asp-controller="Department" asp-action="AddDepartment">Add New Department</a>
     </span>
 </h2>
-
+<hr />
 <table class="table table-bordered table-striped">
     <thead class="thead-light">
         <tr>
@@ -39,7 +39,7 @@
                     else
                     {
                         <form method="post">
-                            <button type="submit" class="btn btn-danger btn-sm"
+                            <button type="submit" class="btn btn-outline-danger"
                             asp-area="Administration" asp-controller="Department" asp-action="DeleteDepartment" asp-route-id="@department.Id">
                                 Delete
                             </button>

@@ -25,6 +25,13 @@
         [HttpPost]
         public async Task<IActionResult> CancelAppointment(int id)
         {
+            var appointment = await this.appointmentService.GetByIdAsync(id);
+
+            if (appointment.IsConfirmed == true)
+            {
+                return this.RedirectToAction(nameof(this.Index));
+            }
+
             await this.appointmentService.DeleteAsync(id);
 
             return this.RedirectToAction(nameof(this.Index));
