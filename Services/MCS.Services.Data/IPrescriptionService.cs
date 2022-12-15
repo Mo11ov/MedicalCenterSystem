@@ -13,6 +13,8 @@
 
         Task<PrescriptionListViewModel> GetAllAsync();
 
-        Task<PrescriptionListViewModel> GetAllByUserAsync(string userId);
+        Task<PrescriptionListViewModel> GetAllByPatientAsync(string patientId);
+
+        Task<PrescriptionListViewModel> GetAllByDoctorAsync(string doctorId);
     }
 }

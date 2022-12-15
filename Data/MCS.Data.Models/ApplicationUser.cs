@@ -25,7 +25,8 @@ namespace MCS.Data.Models
             this.Notifications = new HashSet<Notification>();
             this.Patients = new HashSet<PatientDoctor>();
             this.Doctors = new HashSet<PatientDoctor>();
-            this.Prescriptions = new HashSet<Prescription>();
+            this.PatientPrescriptions = new HashSet<Prescription>();
+            this.DoctorPrescriptions = new HashSet<Prescription>();
         }
 
         // Audit info
@@ -68,7 +69,9 @@ namespace MCS.Data.Models
 
         public virtual ICollection<PatientDoctor> Doctors { get; set; }
 
-        public virtual ICollection<Prescription> Prescriptions { get; set; }
+        public virtual ICollection<Prescription> PatientPrescriptions { get; set; }
+
+        public virtual ICollection<Prescription> DoctorPrescriptions { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 

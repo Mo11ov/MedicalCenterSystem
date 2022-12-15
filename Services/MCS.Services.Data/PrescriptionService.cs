@@ -18,15 +18,17 @@
             this.prescriptionRepository = prescriptionRepository;
         }
 
-        public async Task AddAsync(string patientId, string doctorName, string treatment, DateTime issuedDate)
+        public async Task AddAsync(string patientId, string doctorId, string treatment, DateTime issuedDate)
         {
             await this.prescriptionRepository.AddAsync(new Prescription
             {
                 PatientId = patientId,
-                DoctorsName = doctorName,
+                DoctorId = doctorId,
                 Treatment = treatment,
                 IssuedDate = issuedDate,
             });
+
+            await this.prescriptionRepository.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
@@ -43,14 +45,15 @@
             var prescriptions = await this.prescriptionRepository
                 .AllAsNoTracking()
                 .Include(x => x.Patient)
+                .Include(x => x.Doctor)
                 .ToListAsync();
 
             var prescriptionModel = new PrescriptionListViewModel
             {
-                Prescriptions = prescriptions.Select(x => new PrescriptionViewModel 
+                Prescriptions = prescriptions.Select(x => new PrescriptionViewModel
                 {
-                    PatientId = x.PatientId,
-                    DoctorName = x.DoctorsName,
+                    PatientName = x.Patient.FirstName + " " + x.Patient.LastName,
+                    DoctorName = x.Doctor.FirstName + " " + x.Doctor.LastName,
                     Treatment = x.Treatment,
                     IssuedDate = x.IssuedDate.ToString("MMMM dd"),
                     IssuedTime = x.IssuedDate.ToString("h:mm tt"),
@@ -60,20 +63,45 @@
             return prescriptionModel;
         }
 
-        public async Task<PrescriptionListViewModel> GetAllByUserAsync(string userId)
+        public async Task<PrescriptionListViewModel> GetAllByDoctorAsync(string doctorId)
+        {
+            var prescriptions = await this.prescriptionRepository
+               .AllAsNoTracking()
+               .Where(x => x.DoctorId == doctorId)
+               .Include(x => x.Patient)
+               .Include(x => x.Doctor)
+               .ToListAsync();
+
+            var prescriptionModel = new PrescriptionListViewModel
+            {
+                Prescriptions = prescriptions.Select(x => new PrescriptionViewModel
+                {
+                    PatientName = x.Patient.FirstName + " " + x.Patient.LastName,
+                    DoctorName = x.Doctor.FirstName + " " + x.Doctor.LastName,
+                    Treatment = x.Treatment,
+                    IssuedDate = x.IssuedDate.ToString("MMMM dd"),
+                    IssuedTime = x.IssuedDate.ToString("h:mm tt"),
+                }),
+            };
+
+            return prescriptionModel;
+        }
+
+        public async Task<PrescriptionListViewModel> GetAllByPatientAsync(string patientId)
         {
             var prescriptions = await this.prescriptionRepository
                 .AllAsNoTracking()
-                .Where(x => x.PatientId == userId)
+                .Where(x => x.PatientId == patientId)
                 .Include(x => x.Patient)
+                .Include(x => x.Doctor)
                 .ToListAsync();
 
             var prescriptionModel = new PrescriptionListViewModel
             {
                 Prescriptions = prescriptions.Select(x => new PrescriptionViewModel
                 {
-                    PatientId = x.PatientId,
-                    DoctorName = x.DoctorsName,
+                    PatientName = x.Patient.FirstName + " " + x.Patient.LastName,
+                    DoctorName = x.Doctor.FirstName + " " + x.Doctor.LastName,
                     Treatment = x.Treatment,
                     IssuedDate = x.IssuedDate.ToString("MMMM dd"),
                     IssuedTime = x.IssuedDate.ToString("h:mm tt"),
