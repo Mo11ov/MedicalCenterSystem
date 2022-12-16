@@ -52,6 +52,7 @@
             {
                 Prescriptions = prescriptions.Select(x => new PrescriptionViewModel
                 {
+                    Id = x.Id,
                     PatientName = x.Patient.FirstName + " " + x.Patient.LastName,
                     DoctorName = x.Doctor.FirstName + " " + x.Doctor.LastName,
                     Treatment = x.Treatment,
@@ -76,6 +77,7 @@
             {
                 Prescriptions = prescriptions.Select(x => new PrescriptionViewModel
                 {
+                    Id=x.Id,
                     PatientName = x.Patient.FirstName + " " + x.Patient.LastName,
                     DoctorName = x.Doctor.FirstName + " " + x.Doctor.LastName,
                     Treatment = x.Treatment,
@@ -100,6 +102,7 @@
             {
                 Prescriptions = prescriptions.Select(x => new PrescriptionViewModel
                 {
+                    Id = x.Id,
                     PatientName = x.Patient.FirstName + " " + x.Patient.LastName,
                     DoctorName = x.Doctor.FirstName + " " + x.Doctor.LastName,
                     Treatment = x.Treatment,

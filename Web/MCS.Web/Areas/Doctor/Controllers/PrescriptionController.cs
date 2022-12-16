@@ -60,5 +60,13 @@
 
             return this.RedirectToAction(nameof(this.Index));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.prescriptionService.DeleteAsync(id);
+
+            return this.RedirectToAction(nameof(this.Index));
+        }
     }
 }

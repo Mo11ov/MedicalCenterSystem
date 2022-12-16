@@ -30,11 +30,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-bg-info" asp-area="" asp-controller="Doctors" asp-action="Index">Doctors</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-bg-info" asp-area="" asp-controller="Appointments" asp-action="MakeAppointment">Appointments</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-bg-info" asp-area="" asp-controller="Appointments" asp-action="Index">My appointments</a>
+                        <li>
+                            <div class="dropdown">
+                                <button type="button" class="btn navbar-text dropdown-toggle" data-bs-toggle="dropdown">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    Appointments
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-controller="Appointments" asp-action="Index">My appointments</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Appointments" asp-action="MakeAppointment">Book Appointment</a></li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -42,14 +48,14 @@
             </div>
         </nav>
     </header>
-    
+
     <div class="container">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @this.RenderBody()
         </main>
     </div>
-    
+
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
