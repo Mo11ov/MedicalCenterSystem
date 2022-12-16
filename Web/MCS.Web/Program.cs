@@ -56,6 +56,7 @@ namespace MCS.Web
                 }).AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddSignalR();
 
             services.AddSingleton(configuration);
 
@@ -79,6 +80,7 @@ namespace MCS.Web
             services.AddTransient<IAppointmentService, AppointmentService>();
             services.AddTransient<IPrescriptionService, PrescriptionService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ICommentService, CommentService>();
         }
 
         private static void Configure(WebApplication app)
@@ -116,6 +118,7 @@ namespace MCS.Web
             app.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
             app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
+            //app.MapHub<ChatHub>("/chat");
         }
     }
 }

@@ -56,7 +56,7 @@
 
             var doctorId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            await this.prescriptionService.AddAsync(model.PatientId, doctorId, model.Treatment, DateTime.UtcNow);
+            await this.prescriptionService.AddAsync(model.PatientId, doctorId, model.Treatment, DateTime.Now);
 
             return this.RedirectToAction(nameof(this.Index));
         }

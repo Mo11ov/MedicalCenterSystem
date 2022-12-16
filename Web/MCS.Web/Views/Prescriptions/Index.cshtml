@@ -1,0 +1,51 @@
+﻿@model PrescriptionListViewModel
+
+@{
+    this.ViewData["Title"] = "My Prescriptions";
+}
+<br />
+<h2 class="text-center">@this.ViewData["Title"]</h2>
+<hr />
+
+<div class="container">
+    <input class="form-control mb-4" id="tableSearch" type="text"
+           placeholder="Type prescription or doctor name to search">
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="text-center">Doctor name</th>
+                <th class="text-center">Issued date</th>
+                <th class="text-center">Issued time</th>
+                <th class="text-center">Treatment</th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @foreach (var prescription in Model.Prescriptions)
+            {
+                <tr>
+                    <td class="text-center">@prescription.DoctorName</td>
+                    <td class="text-center">@prescription.IssuedDate</td>
+                    <td class="text-center">@prescription.IssuedTime</td>
+                    <td class="text-center">@prescription.Treatment</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<hr />
+@section Scripts
+    {
+    <script>
+        @*// Filter table*@
+
+            $(document).ready(function () {
+                $("#tableSearch").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+    </script>
+}

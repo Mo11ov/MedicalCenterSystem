@@ -30,6 +30,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-bg-info" asp-area="" asp-controller="Doctors" asp-action="Index">Doctors</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-bg-info" asp-area="" asp-controller="Prescriptions" asp-action="Index">Prescriptions</a>
+                        </li>
                         <li>
                             <div class="dropdown">
                                 <button type="button" class="btn navbar-text dropdown-toggle" data-bs-toggle="dropdown">
@@ -37,10 +40,13 @@
                                     Appointments
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" asp-controller="Appointments" asp-action="Index">My appointments</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Appointments" asp-action="MakeAppointment">Book Appointment</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Appointments" asp-action="Index">My appointments</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Appointments" asp-action="MakeAppointment">Book Appointment</a></li>
                                 </ul>
                             </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-bg-info" asp-area="" asp-controller="Comments" asp-action="Index">Comments</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -67,6 +73,7 @@
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
     <script src="~/lib/popper/popper.min.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
     <script src="~/js/lazy.js" asp-append-version="true"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
     @await this.RenderSectionAsync("Scripts", required: false)
