@@ -53,7 +53,8 @@
                     Content = x.UserComment,
                     OwnerName = x.User.FirstName + " " + x.User.LastName,
                     OwnerImgUrl = x.User.ImageUrl,
-                    CreatedOn = x.CreatedOn.ToString("dddd, dd MMMM yyyy"),
+                    CreatedDate = x.CreatedOn.ToString("dd/MM/yyyy"),
+                    CreatedTime = x.CreatedOn.ToString("hh:mm tt"),
                 }).ToArray(),
             };
 

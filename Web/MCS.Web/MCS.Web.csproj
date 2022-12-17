@@ -48,4 +48,9 @@
     <ProjectReference Include="..\MCS.Web.Infrastructure\MCS.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\MCS.Web.ViewModels\MCS.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Hubs\" />
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
 </Project>

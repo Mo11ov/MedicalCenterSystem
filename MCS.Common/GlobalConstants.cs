@@ -52,6 +52,7 @@
 
         public const string UrologyDepartmentImage = "https://res.cloudinary.com/healthy-med/image/upload/v1670418097/departments/Urology-Department_pjimme.jpg";
 
+        public const string BackgroundImage = "https://res.cloudinary.com/healthy-med/image/upload/v1671221049/images/hero-bg_mou3n4.jpg";
         // Count of seeded data
         public const int SeededDepartmentsCount = 5;
 
