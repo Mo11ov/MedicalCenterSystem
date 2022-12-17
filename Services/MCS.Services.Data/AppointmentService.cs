@@ -37,6 +37,7 @@
                 .Include(x => x.Patient)
                 .Include(x => x.Doctor)
                 .ThenInclude(d => d.Department)
+                .OrderByDescending(x => x.DateTime)
                 .ToListAsync();
 
             var appointmentModel = new AppointmentListViewModel
@@ -51,9 +52,7 @@
                     Date = x.DateTime.ToString("MMMM dd"),
                     Time = x.DateTime.ToString("h:mm tt"),
                     IsConfirmed = x.IsConfirmed,
-                }).ToArray()
-                .OrderBy(x => x.Date)
-                .ThenBy(x => x.Time),
+                }).ToArray(),
             };
 
             return appointmentModel;
@@ -99,6 +98,7 @@
                 .Include(x => x.Patient)
                 .Include(x => x.Doctor)
                 .ThenInclude(d => d.Department)
+                .OrderByDescending(x => x.DateTime)
                 .ToListAsync();
 
             var appointmentModel = new AppointmentListViewModel
@@ -113,9 +113,7 @@
                     Date = x.DateTime.ToString("MMMM dd"),
                     Time = x.DateTime.ToString("h:mm tt"),
                     IsConfirmed = x.IsConfirmed,
-                }).ToArray()
-                .OrderBy(x => x.Date)
-                .ThenBy(x => x.Time),
+                }).ToArray(),
             };
 
             return appointmentModel;
@@ -129,6 +127,7 @@
                 .Include(x => x.Patient)
                 .Include(x => x.Doctor)
                 .ThenInclude(d => d.Department)
+                .OrderByDescending(x => x.DateTime)
                 .ToListAsync();
 
             var appointmentModel = new AppointmentListViewModel
@@ -143,9 +142,7 @@
                     Date = x.DateTime.ToString("MMMM dd"),
                     Time = x.DateTime.ToString("h:mm tt"),
                     IsConfirmed = x.IsConfirmed,
-                }).ToArray()
-                .OrderBy(x => x.Date)
-                .ThenBy(x => x.Time),
+                }).ToArray(),
             };
 
             return appointmentModel;
