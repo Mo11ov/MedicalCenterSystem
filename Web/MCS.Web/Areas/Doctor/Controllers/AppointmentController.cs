@@ -9,10 +9,14 @@
     public class AppointmentController : DoctorController
     {
         private readonly IAppointmentService appointmentService;
+        private readonly INotificationService notificationServiceService;
 
-        public AppointmentController(IAppointmentService appointmentService)
+        public AppointmentController(
+            IAppointmentService appointmentService,
+            INotificationService notificationServiceService)
         {
             this.appointmentService = appointmentService;
+            this.notificationServiceService = notificationServiceService;
         }
 
         [HttpGet]
@@ -20,9 +24,9 @@
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var allApointments = await this.appointmentService.GetByDoctorAsync(userId);
+            var allAppointments = await this.appointmentService.GetByDoctorAsync(userId);
 
-            return this.View(allApointments);
+            return this.View(allAppointments);
         }
 
         [HttpPost]
@@ -43,6 +47,13 @@
         [HttpPost]
         public async Task<IActionResult> ConfirmAppointment(int id)
         {
+            var appointment = this.appointmentService.GetByIdAsync(id);
+
+            var patientId = appointment.Result.PatientId;
+            var doctorName = appointment.Result.Doctor.FirstName + " " + appointment.Result.Doctor.LastName;
+
+            await this.notificationServiceService
+                .CreateAsync(patientId, $"Your appointment with {doctorName} has been confirmed");
             await this.appointmentService.ConfirmAsync(id);
 
             return this.RedirectToAction(nameof(this.Index));
@@ -51,6 +62,13 @@
         [HttpPost]
         public async Task<IActionResult> CancelAppointment(int id)
         {
+            var appointment = this.appointmentService.GetByIdAsync(id);
+
+            var patientId = appointment.Result.PatientId;
+            var doctorName = appointment.Result.Doctor.FirstName + " " + appointment.Result.Doctor.LastName;
+            await this.notificationServiceService
+                .CreateAsync(patientId, $"Your appointment with {doctorName} has been canceled");
+
             await this.appointmentService.CancelAsync(id);
 
             return this.RedirectToAction(nameof(this.Index));

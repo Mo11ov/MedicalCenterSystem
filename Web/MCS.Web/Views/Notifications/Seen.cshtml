@@ -1,0 +1,23 @@
+﻿@model NotificationsListViewModel
+
+@{
+    this.ViewData["Title"] = "New Notifications";
+}
+<br />
+<h2 class="text-center">My Notifications</h2>
+<br />
+<div class="row">
+    @foreach (var notification in Model.Notifications)
+    {
+        <div class="card">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td style="width:70%"><div class="card-title"> '<b>@notification.Content on @notification.Date @notification.Time</b>' </div></td>
+                        <td style="width:30%"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    }
+</div>

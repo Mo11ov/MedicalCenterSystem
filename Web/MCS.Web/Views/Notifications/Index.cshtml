@@ -1,0 +1,27 @@
+﻿@model NotificationsListViewModel
+
+<br />
+<h2 class="text-center">New Notifications</h2>
+<br />
+<div class="row">
+    @foreach (var notification in Model.Notifications)
+    {
+        <div class="card">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td style="width:70%"><div class="card-title"> '<b>@notification.Content</b>' </div></td>
+                        <td style="width:30%">
+                            <form method="post" class="text-center">
+                                <button type="submit" class="btn btn-outline-danger"
+                                        asp-area="" asp-controller="Notifications" asp-action="MarkAsRead" asp-route-id="@notification.Id">
+                                    Mark as Read
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    }
+</div>

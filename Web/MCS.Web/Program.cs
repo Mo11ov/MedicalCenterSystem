@@ -81,6 +81,7 @@ namespace MCS.Web
             services.AddTransient<IPrescriptionService, PrescriptionService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ICommentService, CommentService>();
+            services.AddTransient<INotificationService, NotificationService>();
         }
 
         private static void Configure(WebApplication app)

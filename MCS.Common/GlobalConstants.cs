@@ -33,7 +33,7 @@
 
         public const int DescriptionMaxLength = 500;
 
-        public const int NotificationContentMaxLength = 50;
+        public const int NotificationContentMaxLength = 100;
 
         public const int NotificationContentMinLength = 5;
 

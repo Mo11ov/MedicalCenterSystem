@@ -60,7 +60,11 @@
 
         public async Task<Appointment> GetByIdAsync(int id)
         {
-            return await this.appointmentRepository.AllAsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            return await this.appointmentRepository
+                .AllAsNoTracking()
+                .Include(x => x.Patient)
+                .Include(x => x.Doctor)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task ConfirmAsync(int id)
