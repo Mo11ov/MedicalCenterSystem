@@ -101,7 +101,7 @@ namespace MCS.Web.Areas.Identity.Pages.Account
                     FirstName = this.Input.FirstName,
                     LastName = this.Input.LastName,
                     Email = this.Input.Email,
-                    UserName = this.Input.FirstName,
+                    UserName = this.Input.Email,
                     Gender = this.Input.Gender,
                 };
 

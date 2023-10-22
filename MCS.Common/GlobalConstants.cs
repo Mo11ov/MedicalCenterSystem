@@ -16,6 +16,8 @@
 
         public const string UserEmail = "user@appuser.com";
 
+        public const string CloudName = "healthy-med";
+
         // Data Validations
         public const int NameMaxLength = 25;
 

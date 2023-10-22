@@ -3,6 +3,7 @@ namespace MCS.Web
     using System.Reflection;
 
     using CloudinaryDotNet;
+    using MCS.Common;
     using MCS.Data;
     using MCS.Data.Common;
     using MCS.Data.Common.Repositories;
@@ -67,7 +68,7 @@ namespace MCS.Web
 
             // Cloudinary service
             Cloudinary cloudinary = new Cloudinary(new Account(
-               configuration["Cloudinary:CloudName"],
+               GlobalConstants.CloudName, // configuration["Cloudinary:CloudName"],
                configuration["Cloudinary:ApiKey"],
                configuration["Cloudinary:ApiSecret"]));
             services.AddSingleton(cloudinary);
