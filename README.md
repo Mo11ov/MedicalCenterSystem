@@ -86,9 +86,17 @@ You won't get an error for missing Cloudinary Credentials - it is handled by usi
 
 ![HealthyMed-HomePage](https://res.cloudinary.com/healthy-med/image/upload/v1697993568/uploads/HomePage_mfukrd.png)
 
+## :framed_picture: Screenshot - Departments Page
+
+![HealthyMed-DeparmentsPage](https://res.cloudinary.com/healthy-med/image/upload/v1697995625/uploads/Departments_ecvo5x.png)
+
 ## :framed_picture: Screenshot - Make An Appointment Page
 
 ![HealthyMed-MakeAnAppointment](https://res.cloudinary.com/healthy-med/image/upload/v1697993568/uploads/BookAppoinmentPage_kdbrwl.png)
+
+## :framed_picture: Screenshot - Doctors Page
+
+![HealthyMed-DoctorsPage](https://res.cloudinary.com/healthy-med/image/upload/v1697995625/uploads/Doctors_fikdlg.png)
 
 ## License
 
