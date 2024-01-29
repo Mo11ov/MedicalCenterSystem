@@ -15,5 +15,7 @@
         Task<NotificationsListViewModel> GetAllSeenByUserAsync(string userId);
 
         Task<NotificationsListViewModel> GetAllNotSeenByUserAsync(string userId);
+
+        Task<bool> GetUnreadNotifications(string id);
     }
 }

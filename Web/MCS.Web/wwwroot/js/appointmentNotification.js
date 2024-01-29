@@ -8,6 +8,12 @@ connection.on("appointmentConfirmed", () => {
     // You can update the UI or take any other necessary actions
 });
 
+connection.on("cancelAppointmen", () => {
+    // Handle the appointment confirmation notification on the client side
+    alert('Appointment canceled!');
+    // You can update the UI or take any other necessary actions
+});
+
 connection.start()
     .then(() => {
         // Connection established

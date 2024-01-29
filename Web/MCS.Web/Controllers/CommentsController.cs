@@ -27,7 +27,7 @@
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             var model = new CommentInputModel();
 

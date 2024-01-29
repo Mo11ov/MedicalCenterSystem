@@ -42,7 +42,7 @@
         {
             await this.notificationService.MarkAsReadAsync(id);
 
-            return RedirectToAction(nameof(this.Index));
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }

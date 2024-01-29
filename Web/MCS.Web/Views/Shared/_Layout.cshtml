@@ -1,4 +1,8 @@
 ﻿@using MCS.Common
+@using System.Security.Claims;
+
+@inject MCS.Services.Data.INotificationService notificationService
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,16 +45,25 @@
                                 </div>
                             </li>
                             <li>
-                                <div class="dropdown">
-                                    <button type="button" class="btn navbar-text dropdown-toggle" data-bs-toggle="dropdown">
-                                        <i class="fa fa-bell" aria-hidden="true"></i>
-                                        Notifications
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="Notifications" asp-action="Index">New Notifications</a></li>
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="Notifications" asp-action="Seen">All Notifications</a></li>
-                                    </ul>
-                                </div>
+                                @if (User?.Identity?.IsAuthenticated ?? false)
+                                {
+                                    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                                    var unreadNotif = notificationService.GetUnreadNotifications(userId);
+
+                                    var bellIcon = unreadNotif.Result == true ? "fas fa-bell" : "fa fa-bell";
+
+                                    <div class="dropdown">
+                                        <button type="button" class="btn navbar-text dropdown-toggle" data-bs-toggle="dropdown">
+                                            <i class="@bellIcon" aria-hidden="true"></i>
+                                            Notifications
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" asp-area="" asp-controller="Notifications" asp-action="Index">New Notifications</a></li>
+                                            <li><a class="dropdown-item" asp-area="" asp-controller="Notifications" asp-action="Seen">All Notifications</a></li>
+                                        </ul>
+                                    </div>
+                                }
                             </li>
                         }
                         <li class="nav-item">

@@ -91,5 +91,21 @@
 
             return notificationModel;
         }
+
+        public async Task<bool> GetUnreadNotifications(string id)
+        {
+            var notifications = await this.notificationRepository
+                .AllAsNoTracking()
+                .Where(x => x.UserId == id && x.IsRead == false)
+                .OrderBy(x => x.CreatedOn)
+                .ToListAsync();
+
+            if (notifications.Count > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
