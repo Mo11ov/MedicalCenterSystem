@@ -4,19 +4,24 @@
     using System.Threading.Tasks;
 
     using MCS.Services.Data;
+    using MCS.Web.Hubs;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.SignalR;
 
     public class AppointmentController : DoctorController
     {
         private readonly IAppointmentService appointmentService;
         private readonly INotificationService notificationServiceService;
+        private readonly IHubContext<AppointmentHub> hubContext;
 
         public AppointmentController(
             IAppointmentService appointmentService,
-            INotificationService notificationServiceService)
+            INotificationService notificationServiceService,
+            IHubContext<AppointmentHub> hubContext)
         {
             this.appointmentService = appointmentService;
             this.notificationServiceService = notificationServiceService;
+            this.hubContext = hubContext;
         }
 
         [HttpGet]
@@ -54,6 +59,9 @@
 
             await this.notificationServiceService
                 .CreateAsync(patientId, $"Your appointment with {doctorName} has been confirmed");
+
+            await this.hubContext.Clients.User(patientId).SendAsync("appointmentConfirmed");
+
             await this.appointmentService.ConfirmAsync(id);
 
             return this.RedirectToAction(nameof(this.Index));

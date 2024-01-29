@@ -14,6 +14,7 @@ namespace MCS.Web
     using MCS.Services.Data;
     using MCS.Services.Mapping;
     using MCS.Services.Messaging;
+    using MCS.Web.Hubs;
     using MCS.Web.ViewModels;
 
     using Microsoft.AspNetCore.Builder;
@@ -120,7 +121,7 @@ namespace MCS.Web
             app.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
             app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
-            //app.MapHub<ChatHub>("/chat");
+            app.MapHub<AppointmentHub>("/appointmentHub");
         }
     }
 }
