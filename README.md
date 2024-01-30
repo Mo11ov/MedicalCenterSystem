@@ -14,10 +14,12 @@ A healthy med web application for health services, prescriptions etc. appointmen
   - book appointments using interactive datepicker; 
   - can cancel appointments; 
   - can write comments posts.  
+  - receive real time notifications
 - Doctor (user role):
   - confirms/declines user appointments; 
   - create/deletes user prescription.
   - can review his prescriptions history.
+  - receive real time notifications
 - Admin:
   - creates/deletes departments, users(delete only); 
   - assign/remove roles; 
@@ -42,6 +44,7 @@ A healthy med web application for health services, prescriptions etc. appointmen
 - Custom Validation Attributes
 - Responsive Design
 - CloudinaryDotNet
+- SignalR ( Real time notifications )
 - Bootstrap
 - jQuery
 
